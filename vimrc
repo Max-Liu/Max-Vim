@@ -547,7 +547,7 @@ Bundle 'bronson/vim-trailing-whitespace'
 
 "主题 solarized
 Bundle 'altercation/vim-colors-solarized'
-"let g:solarized_termcolors=256
+let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 let g:solarized_contrast="normal"
 let g:solarized_visibility="normal"
@@ -577,10 +577,12 @@ let g:ycm_key_list_previous_completion=['<c-p>']
 
 
 "快速插入代码片段
-"Bundle 'SirVer/ultisnips'
-let g:UltiSnipsExpandTrigger = "<tab>"
-
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"快速插入代码片段引擎
+Bundle 'SirVer/ultisnips'
+"快速插入代码片段模板
+Bundle 'honza/vim-snippets'
+"let g:UltiSnipsExpandTrigger = "<tab>"
+"let g:UltiSnipsJumpForwardTrigger = "<tab>"
 ""定义存放代码片段的文件夹 .vim/snippets下，使用自定义和默认的，将会的到全局，有冲突的会提示
 "let g:UltiSnipsSnippetDirectories=["snippets", "bundle/UltiSnips/UltiSnips"]
 
@@ -588,8 +590,9 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 Bundle 'scrooloose/nerdcommenter'
 
 " 快速加入修改环绕字符
-Bundle 'tpope/vim-surround'
-"for repeat -> enhance surround.vim, . to repeat command
+"Bundle 'tpope/vim-surround'
+
+""for repeat -> enhance surround.vim, . to repeat command
 "Bundle 'tpope/vim-repeat'
 
 "自动补全单引号，双引号等
@@ -662,11 +665,11 @@ Bundle 'cespare/vim-toml'
 "map <leader>td <Plug>TaskList
 
 " for git 尚未用起来
-"Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-fugitive'
 
 "edit history, 可以查看回到某个历史状态
-"Bundle 'sjl/gundo.vim'
-"nnoremap <leader>h :GundoToggle<CR>
+Bundle 'sjl/gundo.vim'
+nnoremap <leader>h :GundoToggle<CR>
 
 " end turn on
 filetype plugin indent on
@@ -736,4 +739,5 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 Bundle 'vim-ruby/vim-ruby'
-
+autocmd FileType ruby compiler ruby
+Bundle 'tpope/vim-rails'
