@@ -420,6 +420,7 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^
 let g:netrw_home='~/bak'
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+let g:NERDTreeWinSize = 60 
 Bundle 'fatih/vim-go'
 au FileType go nmap <leader>gg <Plug>(go-def)
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -461,7 +462,7 @@ let g:tagbar_autofocus = 1
 "标签导航 要装ctags
 "Bundle 'vim-scripts/taglist.vim'
 "set tags=tags;/
-"let Tlist_Ctags_Cmd="/usr/bin/ctags"
+"let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
 "nnoremap <silent> <F8> :TlistToggle<CR>
 "let Tlist_Auto_Highlight_Tag = 1
 "let Tlist_Auto_Open = 0
@@ -590,7 +591,7 @@ Bundle 'honza/vim-snippets'
 Bundle 'scrooloose/nerdcommenter'
 
 " 快速加入修改环绕字符
-"Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-surround'
 
 ""for repeat -> enhance surround.vim, . to repeat command
 "Bundle 'tpope/vim-repeat'
@@ -623,22 +624,21 @@ let g:syntastic_error_symbol='>>'
 let g:syntastic_warning_symbol='>'
 let g:syntastic_check_on_open=0
 let g:syntastic_enable_highlighting = 1
-"let g:syntastic_python_checker="flake8,pyflakes,pep8,pylint"
+let g:syntastic_python_checker="flake8,pyflakes,pep8,pylint"
 let g:syntastic_python_checkers=['pyflakes']
 highlight SyntasticErrorSign guifg=white guibg=black
 
- "python fly check, 弥补syntastic只能打开和保存才检查语法的不足
-"Bundle 'kevinw/pyflakes-vim'
-"let g:pyflakes_use_quickfix = 1
+"python fly check, 弥补syntastic只能打开和保存才检查语法的不足
+Bundle 'kevinw/pyflakes-vim'
+let g:pyflakes_use_quickfix = 1
 
 
 "################# 具体语言语法高亮 ###############
 
 " for python.vim syntax highlight
-"Bundle 'hdima/python-syntax'
-"let python_highlight_all = 1
+Bundle 'hdima/python-syntax'
+let python_highlight_all = 1
 
-" for golang
 
 " for markdown
 Bundle 'plasticboy/vim-markdown'
@@ -739,5 +739,31 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 Bundle 'vim-ruby/vim-ruby'
-autocmd FileType ruby compiler ruby
+
+Bundle "rizzatti/dash.vim"
+"for ruby
+"au FileType ruby nmap <leader>gg <Plug>tag .expand("<cword>")
+"
+"map <leader>gg <CR>:exec("tag" .expand("<cword>"))<CR>
+map <leader>gg :exec("tag ".expand("<cword>"))<CR>
+"autocmd FileType ruby compiler ruby
 Bundle 'tpope/vim-rails'
+
+set grepprg=ack
+
+au FileType ruby set tabstop=2
+au FileType ruby set softtabstop=2
+au FileType ruby set shiftwidth=2
+au FileType ruby set expandtab
+au FileType ruby map <leader>r :exec("!ruby ".expand("%:p"))<CR>
+au FileType python map <leader>r :exec("!python ".expand("%:p"))<CR>
+map<F10> :!ctags -R -f ./tags /usr/local/lib/python2.7/site-packages<CR>
+"
+"set tags=./tags;
+"let g:easytags_dynamic_files = 1
+"Bundle "xolox/vim-easytags"
+"Bundle "xolox/vim-misc"
+"autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
+"autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+"autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+Bundle 'elzr/vim-json'
