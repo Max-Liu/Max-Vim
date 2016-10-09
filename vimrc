@@ -100,7 +100,7 @@ set foldenable
 " syntax    使用语法定义折叠
 " diff      对没有更改的文本进行折叠
 " marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
-set foldmethod=indent
+set foldmethod=manual
 set foldlevel=99
 
 "Smart indent
@@ -491,7 +491,7 @@ let g:tagbar_autofocus = 1
 Bundle 'kien/ctrlp.vim'
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
-map <leader>f :CtrlPMRU<CR>
+map <leader>f :CtrlP<CR>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
@@ -575,6 +575,7 @@ let g:ycm_key_list_select_completion=['<c-n>']
 "let g:ycm_key_list_select_completion = ['<tab>']
 let g:ycm_key_list_previous_completion=['<c-p>']
 "let g:ycm_key_list_previous_completion = ['<Up>']
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  
 
 
 "快速插入代码片段
@@ -619,18 +620,18 @@ au FileType python let b:delimitMate_nesting_quotes = ['"']
 
 " 编辑时自动语法检查标红, vim-flake8目前还不支持,所以多装一个
 " 使用pyflakes,速度比pylint快
-Bundle 'scrooloose/syntastic'
-let g:syntastic_error_symbol='>>'
-let g:syntastic_warning_symbol='>'
-let g:syntastic_check_on_open=0
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_python_checker="flake8,pyflakes,pep8,pylint"
-let g:syntastic_python_checkers=['pyflakes']
-highlight SyntasticErrorSign guifg=white guibg=black
+"Bundle 'scrooloose/syntastic'
+"let g:syntastic_error_symbol='>>'
+"let g:syntastic_warning_symbol='>'
+"let g:syntastic_check_on_open=0
+"let g:syntastic_enable_highlighting = 1
+"let g:syntastic_python_checker="flake8,pyflakes,pep8,pylint"
+"let g:syntastic_python_checkers=['pyflakes']
+"highlight SyntasticErrorSign guifg=white guibg=black
 
 "python fly check, 弥补syntastic只能打开和保存才检查语法的不足
-Bundle 'kevinw/pyflakes-vim'
-let g:pyflakes_use_quickfix = 1
+"Bundle 'kevinw/pyflakes-vim'
+"let g:pyflakes_use_quickfix = 1
 
 
 "################# 具体语言语法高亮 ###############
@@ -741,6 +742,7 @@ let g:multi_cursor_quit_key='<Esc>'
 Bundle 'vim-ruby/vim-ruby'
 
 Bundle "rizzatti/dash.vim"
+nmap <silent> <leader>d <Plug>DashSearch
 "for ruby
 "au FileType ruby nmap <leader>gg <Plug>tag .expand("<cword>")
 "
@@ -757,13 +759,9 @@ au FileType ruby set shiftwidth=2
 au FileType ruby set expandtab
 au FileType ruby map <leader>r :exec("!ruby ".expand("%:p"))<CR>
 au FileType python map <leader>r :exec("!python ".expand("%:p"))<CR>
-map<F10> :!ctags -R -f ./tags /usr/local/lib/python2.7/site-packages<CR>
-"
-"set tags=./tags;
-"let g:easytags_dynamic_files = 1
+au FileType python map <F10> :!ctags -R --languages=python --python-kinds=-iv /usr/local/lib/python2.7
+au FileType sh map <leader>r :exec("!sh ".expand("%:p"))<CR>
+
 "Bundle "xolox/vim-easytags"
-"Bundle "xolox/vim-misc"
-"autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
-"autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-"autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 Bundle 'elzr/vim-json'
+Bundle 'rking/ag.vim'
